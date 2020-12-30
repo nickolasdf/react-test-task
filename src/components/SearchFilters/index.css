@@ -1,0 +1,12 @@
+.search-filters {
+
+}
+
+.search-filters__form {
+    display: flex;
+
+}
+
+.search-filters__date-picker {
+    flex: 1;
+}

@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Spin } from "antd";
+
+import SearchFilters from "./components/SearchFilters";
+
+import HotelList from "./components/HotelsList";
+
 import './App.css';
 
+const WithLoader = ({ loading, children  }) => {
+    if(loading) {
+        return (
+            <div className="spin-wrapper">
+                <Spin size="large" />
+            </div>
+        )
+    } else
+        return children;
+};
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const dispatch = useDispatch();
+    const hotels = useSelector(state => state.hotels);
+
+    useEffect(() => {
+        dispatch({ type: "FETCH_HOTELS" })
+    }, [dispatch]);
+
+    const handleSubmit = (data) => {
+        const [dateFrom, dateTo] = data.dateRange;
+
+        dispatch({
+            type: "FETCH_HOTELS",
+            params: {
+                dateFrom,
+                dateTo
+            }
+        })
+    };
+
+    return (
+        <div className="App">
+            <div className="content">
+                <h1>Best Deals</h1>
+                <h2>Check for some amazing deals all year round</h2>
+                <SearchFilters onChange={handleSubmit} />
+                <WithLoader loading={hotels.isLoading}>
+                    <HotelList hotels={hotels.data} />
+                </WithLoader>
+            </div>
+        </div>
+    );
 }
 
 export default App;

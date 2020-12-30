@@ -1,0 +1,16 @@
+.date-item {
+    display: flex;
+    flex-direction: column;
+    padding: 8px;
+    border: 1px solid #d9d9d9;
+    border-radius: 8px;
+    background-color: #fafafa;
+    width: 100%;
+    margin: 0 8px;
+}
+.date-item__name {
+    font-weight: bold;
+}
+.date-item__date {
+    color: #d9d9d9;
+}

@@ -1,0 +1,21 @@
+.hotel-card {
+    display: flex;
+    width: 100%;
+    border: 1px solid black;
+}
+.hotel-card__section {
+    width: 50%;
+}
+.hotel-card__info {
+    padding: 20px;
+}
+.hotel-card__date-range {
+    display: flex;
+    margin: 0 -8px;
+}
+.hotel-card__row {
+    margin-bottom: 1rem;
+}
+.hotel-card__image {
+    width: 100%;
+}
